@@ -273,7 +273,7 @@ function isCreditCardNumber(ccn) {
   const res = [];
   // eslint-disable-next-line no-unused-expressions
   arr.length % 2 === 0 ? index = 0 : index = 1;
-  arr.forEach((item, i) => {
+  arr.forEach((_item, i) => {
     // eslint-disable-next-line radix
     if (i % 2 !== index) res.push(Number(arr[i]));
     else if (arr[i] * 2 > 9) res.push(arr[i] * 2 - 9);
@@ -380,8 +380,16 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+// eslint-disable-next-line consistent-return
+function getCommonDirectoryPath(pathes) {
+  for (let i = 0; i < pathes[0].length; i++) {
+    for (let j = 1; j < pathes.length; j++) {
+      if (pathes[0][i] !== pathes[j][i]) {
+        const result = pathes[0].slice(0, i);
+        return result.slice(0, result.lastIndexOf('/') + 1);
+      }
+    }
+  }
 }
 
 
@@ -403,8 +411,23 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+  m1.forEach((_element, i) => {
+    result[i] = [];
+  });
+
+  m2[0].forEach((_element, i) => {
+    m1.forEach((_elem, j) => {
+      let n = 0;
+      m2.forEach((_e, k) => {
+        n += m1[j][k] * m2[k][i];
+        result[j][i] = n;
+      });
+    });
+  });
+
+  return result;
 }
 
 
@@ -438,8 +461,19 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+// eslint-disable-next-line consistent-return
+function evaluateTicTacToePosition(p) {
+  function find(f1, f2, f3) {
+    return f1 && f1 === f2 && f2 === f3;
+  }
+
+  for (let i = 0; i < 3; i++) {
+    if (find(p[i][0], p[i][1], p[i][2])) return p[i][0];
+    if (find(p[0][i], p[1][i], p[2][i])) return p[0][i];
+    if (find(p[0][0], p[1][1], p[2][2])) return p[0][0];
+    if (find(p[0][2], p[1][1], p[2][0])) return p[0][2];
+  }
+  // throw new Error('Not implemented');
 }
 
 
