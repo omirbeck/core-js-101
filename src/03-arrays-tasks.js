@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* ********************************************************************************************
  *                                                                                            *
@@ -518,8 +519,17 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const map = new Map();
+  // eslint-disable-next-line array-callback-return
+  array.map((element) => {
+    const key = keySelector(element);
+    const value = valueSelector(element);
+    if (map.has(key)) map.get(key).push(value);
+    else map.set(key, [value]);
+  });
+
+  return map;
 }
 
 
@@ -536,8 +546,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.reduce((item, index) => item.concat(childrenSelector(index)), []);
 }
 
 
@@ -553,8 +563,10 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  // eslint-disable-next-line no-return-assign
+  indexes.map((element) => arr = arr[element]);
+  return arr;
 }
 
 
