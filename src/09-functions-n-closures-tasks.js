@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 /* *********************************************************************************************
  *                                                                                             *
  * Plese read the following tutorial before implementing tasks:                                *
@@ -108,8 +107,17 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return () => {
+    for (let i = 0; i <= attempts; i += 1) {
+      try {
+        return func();
+      } catch (e) {
+        // errors
+      }
+    }
+    return true;
+  };
 }
 
 
@@ -136,8 +144,21 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return (...args) => {
+    const arr = [].slice.call(args);
+    let str = JSON.stringify(arr);
+
+    str = str.slice(1, -1);
+    str = `${func.name}(${str})`;
+
+    logFunc(`${str} starts`);
+
+    const result = func.apply(this, arr);
+    logFunc(`${str} ends`);
+
+    return result;
+  };
 }
 
 
@@ -154,8 +175,11 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  if (typeof fn === 'function') {
+    return (...args) => fn(...args1, ...args);
+  }
+  return fn(...args1);
 }
 
 
@@ -176,9 +200,12 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  // return () => startFrom += 1;
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let start = startFrom - 1;
+  return () => {
+    start += 1;
+    return start;
+  };
 }
 
 
