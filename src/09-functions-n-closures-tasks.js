@@ -1,3 +1,6 @@
+/* eslint-disable no-empty */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
 /* *********************************************************************************************
  *                                                                                             *
  * Plese read the following tutorial before implementing tasks:                                *
@@ -63,8 +66,11 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  return (argument) => (
+    [...args].reverse().reduce((a, b, c) => a + b * (argument ** c))
+  );
+  // throw new Error('Not implemented');
 }
 
 
@@ -82,8 +88,10 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  // eslint-disable-next-line prefer-rest-params
+  const arr = func.apply(this, arguments);
+  return () => arr;
 }
 
 
@@ -102,8 +110,15 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  // eslint-disable-next-line consistent-return
+  return () => {
+    for (let i = 0; i <= attempts; i++) {
+      try {
+        return func();
+      } catch (error) {}
+    }
+  };
 }
 
 
@@ -170,8 +185,8 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  return () => startFrom++;
 }
 
 
