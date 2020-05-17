@@ -1,6 +1,4 @@
-/* eslint-disable no-empty */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* *********************************************************************************************
  *                                                                                             *
  * Plese read the following tutorial before implementing tasks:                                *
@@ -110,15 +108,8 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(func, attempts) {
-  // eslint-disable-next-line consistent-return
-  return () => {
-    for (let i = 0; i <= attempts; i++) {
-      try {
-        return func();
-      } catch (error) {}
-    }
-  };
+function retry(/* func, attempts */) {
+  throw new Error('Not implemented');
 }
 
 
@@ -185,8 +176,9 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(startFrom) {
-  return () => startFrom++;
+function getIdGeneratorFunction(/* startFrom */) {
+  // return () => startFrom += 1;
+  throw new Error('Not implemented');
 }
 
 

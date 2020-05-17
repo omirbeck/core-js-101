@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 /* *************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
@@ -49,7 +48,7 @@ function getFizzBuzz(num) {
  */
 function getFactorial(n) {
   let factor = 1;
-  for (let i = 1; n >= i; i++) {
+  for (let i = 1; n >= i; i += 1) {
     factor *= i;
   }
 
@@ -71,7 +70,7 @@ function getFactorial(n) {
  */
 function getSumBetweenNumbers(n1, n2) {
   let result = 0;
-  for (let i = n1; n2 >= i; i++) {
+  for (let i = n1; n2 >= i; i += 1) {
     result += i;
   }
   return result;
@@ -180,7 +179,7 @@ function isInsideCircle(circle, point) {
  */
 // eslint-disable-next-line consistent-return
 function findFirstSingleChar(str) {
-  for (let i = 0; str.length > i; i++) {
+  for (let i = 0; str.length > i; i += 1) {
     if (str.indexOf(str[i], str.indexOf(str[i]) + 1) < 0) return str[i];
   }
 }
@@ -340,7 +339,7 @@ function isBracketsBalanced(str) {
   let position;
 
   // eslint-disable-next-line no-cond-assign
-  for (let i = 0; char = str[i]; i++) {
+  for (let i = 0; char = str[i]; i += 1) {
     position = brackets.indexOf(char);
 
     if (position % 2 === 0) stack.push(position + 1);
@@ -389,8 +388,8 @@ function toNaryString(num, n) {
  */
 // eslint-disable-next-line consistent-return
 function getCommonDirectoryPath(pathes) {
-  for (let i = 0; i < pathes[0].length; i++) {
-    for (let j = 1; j < pathes.length; j++) {
+  for (let i = 0; i < pathes[0].length; i += 1) {
+    for (let j = 1; j < pathes.length; j += 1) {
       if (pathes[0][i] !== pathes[j][i]) {
         const result = pathes[0].slice(0, i);
         return result.slice(0, result.lastIndexOf('/') + 1);
@@ -474,13 +473,12 @@ function evaluateTicTacToePosition(p) {
     return f1 && f1 === f2 && f2 === f3;
   }
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += 1) {
     if (find(p[i][0], p[i][1], p[i][2])) return p[i][0];
     if (find(p[0][i], p[1][i], p[2][i])) return p[0][i];
     if (find(p[0][0], p[1][1], p[2][2])) return p[0][0];
     if (find(p[0][2], p[1][1], p[2][0])) return p[0][2];
   }
-  // throw new Error('Not implemented');
 }
 
 
